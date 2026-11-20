@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy"><p class="eyebrow">BEAUTY · STYLE · CONFIDENCE</p><h1>Your style.<br><em>Your statement.</em></h1>
+  <p class="lead">A premium unisex salon experience in Nashik, created around your personal style.</p>
+  <div class="hero-actions"><a class="button gold" href="#booking">Book an appointment</a><a class="text-link" href="#services">Explore services ↗</a></div>
+  </div><div class="hero-art"><div class="hero-circle"></div><div class="hero-caption">THE PREMIUM<br><b>STUDIO</b><small>UNISEX SALON · NASHIK</small></div></div>
+</section>
+<section id="about" class="section split"><div><p class="eyebrow">WELCOME TO THE STUDIO</p><h2>A little time for <em>you.</em></h2></div><p>Discover a welcoming salon experience with services for hair, beauty and personal care. Visit us at Oasis Life Society, Nashik.</p></section>
+<section id="services" class="section dark-section"><p class="eyebrow">WHAT WE OFFER</p><h2>Our <em>services</em></h2><p class="section-intro">Explore our salon services. Contact us for service details.</p>
+<div class="service-grid">{% for service in services %}<div class="service-card"><span>{{ "%02d"|format(loop.index) }}</span><h3>{{ service }}</h3></div>{% endfor %}</div></section>
+<section id="gallery" class="section"><p class="eyebrow">THE STUDIO</p><h2>Our <em>space</em></h2><p class="section-intro">A glimpse of the salon. Add your own salon photographs to the gallery when they are ready.</p>
+<div class="gallery-placeholder"><div><span>01</span><b>Salon interior photo</b></div><div><span>02</span><b>Hair & beauty work</b></div><div><span>03</span><b>Our team</b></div></div></section>
+<section id="booking" class="section booking-section"><div><p class="eyebrow">RESERVE YOUR TIME</p><h2>Book an <em>appointment</em></h2><p>Fill in the details below. No account, email address or password is needed. Your request will be sent to the salon for confirmation.</p>
+<div class="hours-card"><h3>Opening hours</h3><p>Monday – Friday <b>9:00 AM – 10:00 PM</b></p><p>Saturday – Sunday <b>8:00 AM – 10:30 PM</b></p></div></div>
+<form class="booking-form" method="post" action="{{ url_for('book') }}">
+<label>Your name<input name="customer_name" required maxlength="80" placeholder="Enter your name"></label>
+<label>Contact number<input name="phone" required maxlength="20" inputmode="tel" placeholder="Enter your phone number"></label>
+<label>Select service<select name="service" required><option value="">Choose a service</option>{% for service in services %}<option>{{ service }}</option>{% endfor %}</select></label>
+<label>Appointment date<input type="date" name="appointment_date" min="{{ '' }}" required></label>
+<label>Appointment time<input type="time" name="appointment_time" required></label>
+<button class="button gold full" type="submit">Submit booking request</button><small>One customer can book each exact date and time. The salon will contact you to confirm availability.</small>
+</form></section>
+<section id="contact" class="section contact-section"><div><p class="eyebrow">COME VISIT US</p><h2>Find <em>us.</em></h2><p>{{ salon.address }}</p><p><b>Call:</b> <a href="tel:+918600693862">{{ salon.phone }}</a></p><p><b>WhatsApp:</b> <a href="https://wa.me/{{ salon.whatsapp }}" target="_blank" rel="noopener">Chat with the salon</a></p><a class="button outline" href="{{ salon.maps }}" target="_blank" rel="noopener">Open Google Maps</a></div><div class="map-panel"><span>THE PREMIUM STUDIO</span><b>NASHIK</b><a href="{{ salon.maps }}" target="_blank" rel="noopener">View location ↗</a></div></section>
+{% endblock %}
